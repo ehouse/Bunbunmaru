@@ -7,9 +7,10 @@ from pygame.locals import *
 from engine.level1 import Level1
 from engine.bulletmanager import BulletManager
 from engine.player import Player
+from engine.sky import clouds
 
 class GameLoop:
-    def __init__(self,width=640,height=480):
+    def __init__(self,width=800,height=600):
         """
             Game loop Class
             Accepts game window height and width
@@ -26,6 +27,7 @@ class GameLoop:
 
         # images
         self.f14 = self._load_png("f14.png")
+        self.cloud = self._load_png("alpha_cloud.png")
         self.bullet = self._load_png("bullet.png")
         self.enemy = self._load_png("mig.png")
 
@@ -35,11 +37,13 @@ class GameLoop:
 
         # entities
         self.enemies = self.level.getCurrentEnemies()
+        self.sky = clouds(self.cloud,self.cloud.get_rect())
         self.player = Player( 3, 0, self.bulletMan, 1, self.f14,
                               self.f14.get_rect(), self.bullet,
                               self.bullet.get_rect() )
 
     def _actall( self ):
+         self.sky.act()
          self.player.act()
          if self.enemies != None:
              self.bulletMan.update( self.enemies )
@@ -54,6 +58,7 @@ class GameLoop:
         Draws the player, bullets, and enemies (in that order) to the screen
         """
         self.screen.fill((135,206,250))
+        self.sky.draw(self.screen)
         self.player.draw(self.screen)
         for enemy in self.enemies.enemyList:
             enemy.draw( self.screen)
