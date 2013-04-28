@@ -15,6 +15,7 @@ class Enemy( Entity ):
 		self.destroyed = False
 		self.hit = False
 		self.hp = hp
+		self.heat = 0
 
 		# sprite vars
 		self._sprite = sprite
@@ -41,3 +42,4 @@ class Enemy( Entity ):
 
 		def applyHit( bullet ):
 			self.hp -= bullet.damageValue
+			heat += 20

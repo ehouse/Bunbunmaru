@@ -1,4 +1,5 @@
 import sys
+import math
 import pygame
 import engine.Entity
 import engine.Bullet
@@ -27,4 +28,8 @@ class BulletManager:
 		"""
 		for bullet in self._playerBulletList:
 			if bullet.collidesWith( entity ):
-				entity.applyHit( bullet )
+				entity.applyHit( bullet )Q
+			distance = math.sqrt( entity.xpos, bullet.xpos,
+								entity.ypos, bullet.xpos )
+			if distance < 100:
+				enemy.heat += ( 100 - distance ) / 10
