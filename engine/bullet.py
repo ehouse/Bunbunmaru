@@ -12,11 +12,13 @@ class Bullet( Entity ):
 	def act( self ):
 		self.ypos -= self._speed
 		self._hitbox = self._hitbox.move( 0 , self._speed )
+		if self._hitbox.y <= -10:
+			self.destroyed = True
 
 	def collidesWith( self, entity ):
 		if self._hitbox.colliderect( entity._hitbox ):
 			return True
 		return False
 
-	def draw( self, screen):
+	def draw( self, screen ):
 		screen.blit( self._sprite, self._hitbox )

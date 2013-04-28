@@ -97,9 +97,12 @@ class Player( Entity ):
 		#TODO invincibility timer
 
 	def _fire( self ):
-		self._bulletMan.addPlayerBullet( Bullet( self.xpos, self.ypos, 0,
-											10, self._bulletSprite,
-											self._bulletBox) )
+		bullet = Bullet( self.xpos, self.ypos, -5, 5, self._bulletSprite,
+						self._bulletSprite.get_rect())
+		xpos = self._viewBox.x
+		ypos = self._viewBox.y
+		bullet._hitbox.move_ip(xpos, ypos)
+		self._bulletMan.addPlayerBullet( bullet )
 	def draw( self, screen ):
 		screen.blit(self._sprite,(self._viewBox))
 
