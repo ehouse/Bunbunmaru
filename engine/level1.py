@@ -5,7 +5,13 @@ import engine.Enemy
 
 class Level1:
 	def __init__ ( self ):
-		self.enemyGroupList = []
+		# We'll create a bs enemy here
+		self.enemyGroupList = [
+			EnemyGroup [
+				Enemy( 0, 0, 5, None, rect( 0, 0, 64, 64 )),
+				Enemy( 100, 0, 5, None, rect( 100, 0, 64, 64 ))
+			]
+		]
 		self.currentEnemyGroup = 0
 		self.backgroundImage = None #TODO load background image here
 
@@ -16,6 +22,7 @@ class Level1:
 	def getCurrentEnemies():
 		"""
 		Gets the current group of enemies for the level
+		Returns: EnemyGroup->The current enemy group
 		"""
 		return enemyGroupList[0]
 
