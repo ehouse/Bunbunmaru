@@ -1,6 +1,6 @@
 import sys
 import pygame
-import engine.Entity
+import engine.entity
 
 class Enemy( Entity ):
 	def __init__( self, xpos, ypos, speed, hp, sprite, hitbox ):

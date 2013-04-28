@@ -1,35 +1,76 @@
 import sys
 import math
 import pygame
-import engine.Entity
-import engine.Bullet
-import engine.Player
+import engine.entity
+import engine.bullet
+import engine.player
 
 class BulletManager:
 	def __init__ ( self ):
 		self._bulletList = []
 		self._playerBulletList = []
 
-	def testEnemyBulletCollision():
+	def addPlayerBullet( bullet ):
 		"""
-		Tests to see if any of the enemy bullets hit the player. This modifies Player.hit to True if there is a hit detected
+		Adds a bullet that will effect enemies to the bullet manager
+		"""
+		self._playerBulletList.append( bullet )
+
+	def addEnemyBullet( bullet ):
+		"""
+		Adds a bullet that will effect the player to the bullet manager
+		"""
+		self._bulletList.append( bullet )
+
+	def drawall():
+		for bullet in self._bulletList:
+			bullet.draw()
+
+		for bullet in self._playerBulletList:
+			bullet.draw()
+
+	def _testEnemyBulletCollision():
+		"""
+		Tests to see if any of the enemy bullets hit the player. This modifies
+		Player.hit to True if there is a hit detected
 		"""
 		for bullet in self._bulletList:
-			if bullet.collidesWith( player ):
+			if bullet.destroyed:
+				self._bulletList.remove( bullet )
+			elif bullet.collidesWith( player ):
 				player.hit = True
 				bullet.hit = True
+				break # if the player is hit once, no point in checking others
 
-	def testPlayerBulletCollision( entity ):
+	def _testPlayerBulletCollision( entity ):
 		"""
-		Tests if the player's bullets have collided with any enemies. This also applys the hits to enemies as needed.
+		Tests if the player's bullets have collided with any enemies. This also
+		applys the hits to enemies as needed.
 
 		Parameters: Enemy->entity
 		Returns: None
 		"""
 		for bullet in self._playerBulletList:
-			if bullet.collidesWith( entity ):
-				entity.applyHit( bullet )Q
-			distance = math.sqrt( entity.xpos, bullet.xpos,
+			if bullet.destroyed:
+				self._playerBulletList.remove( bullet )
+			elif bullet.collidesWith( entity ):
+				entity.applyHit( bullet )
+				distance = math.sqrt( entity.xpos, bullet.xpos,
 								entity.ypos, bullet.xpos )
-			if distance < 100:
-				enemy.heat += ( 100 - distance ) / 10
+				if distance < 100:
+					enemy.heat += ( 100 - distance ) / 10
+
+	def update( enemies ):
+		"""
+		Updates the posision of each bullet and checks for collisions
+		"""
+		for bullet in self._bulletList:
+			bullet.act()
+
+		for enemy in enemies:
+			_testPlayerBulletCollision( enemy )
+
+		for bullet in self.playerBullets:
+			bullet.act()
+
+		_testEnemyBulletCollision()

@@ -1,12 +1,14 @@
 import sys
 import pygame
-import engine.Entity
+import engine.entity
 
 class Player( Entity ):
-	def __init__( self, xpos, ypos, lives, score, maxSpeed, sprite, hitbox, item_box ):
+	def __init__( self, lives, score, maxSpeed, sprite ):
 		# position vars
-		self.xpos = xpos
-		self.ypos = self.ypos
+		self.SPAWN_X = 400
+		self.SPAWN_Y = 300
+		self.xpos = self.SPAWN_X
+		self.ypos = self.SPAWN_Y
 
 		# movement vars
 		self._maxSpeed = maxSpeed
@@ -17,15 +19,15 @@ class Player( Entity ):
 		# Game vars
 		self.lives = lives
 		self.score = score
-		self.SPAWN_X = 400
-		self.SPAWN_Y = 300
 		self.invincible = False
 		self.invincibilityTime = 5000
 
 		# sprite vars
 		self._sprite = sprite
-		self.hitbox = hitbox
-		self._itemBox = itemBox
+		self.hitbox = rect( self.xpos - 10, self.ypos - 10, self.xpos + 54,
+								self.ypos + 54 )
+		self._itemBox = rect( self.xpos, self.ypos, self.xpos + 64,
+									self.ypos + 64 )
 
 	def act():
 		"""

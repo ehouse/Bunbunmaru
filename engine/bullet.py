@@ -1,6 +1,6 @@
 import sys
 import pygame
-import engine.Entity
+import engine.entity
 
 class Bullet( Entity ):
 	def __init__ ( self, xpos, ypos, speed, damageValue, sprite, hitbox ):

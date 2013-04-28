@@ -1,10 +1,10 @@
 import sys
 import pygame
-import engine.Player
-import engine.Enemy
+import engine.player
+import engine.enemy
 
 class Level1:
-	def __init__ ( self ):
+	def __init__( self ):
 		# We'll create a bs enemy here
 		self.enemyGroupList = [
 			EnemyGroup [

@@ -4,7 +4,7 @@ import os,sys
 import pygame
 from pygame.locals import *
 #local imports
-import engine
+from engine import *
 import resources
 
 class GameLoop:
@@ -13,12 +13,21 @@ class GameLoop:
             Game loop Class
             Accepts game window height and width
         """
+        # game display vars
         self.game = pygame
         self.game.init()
         self.width = width
         self.height = height
         self.screen = self.game.display.set_mode((self.width,self.height))
         self.game.display.set_caption('Bunbunmaru Gamejam 2013')
+
+        # level management
+        self.level = Level1()
+        self.bulletMan = BulletManager()
+
+        # entities
+        self.enemies = self.level.getCurrentEnemies()
+        self.player = player( 3, 0, 5, None )
 
     def start(self):
         """
@@ -28,6 +37,27 @@ class GameLoop:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
+            # check if current wave is done, if it is, get new enemies
+            if level.isComplete():
+                enemies = level.getCurrentEnemies()
+            actall()
+            drawall()
+            #TODO add 'tick' stablizer
+
+    def actall():
+         player.act()
+         self.bulletMan.update( self.enemies )
+         for enemy in enemies:
+             enemy.act()
+
+    def drawall():
+        """
+        Draws the player, bullets, and enemies (in that order) to the screen
+        """
+        self.player.draw()
+        for enemy in self.enemies:
+            enemy.draw()
+        self.bulletMan.drawall()
 
     def _load_png(name):
         """
