@@ -89,6 +89,16 @@ class Player( Entity ):
 			else:
 				self._xSpeed = 0
 
+		if self._viewBox.x < 0 and self._xSpeed < 0:
+			self._xSpeed = 0
+		elif self._viewBox.x >= 800 - 64 and self._xSpeed > 0:
+			self._xSpeed = 0
+
+		if self._viewBox.y < 0 and self._ySpeed < 0:
+			self._ySpeed = 0
+		elif self._viewBox.y >= 600 - 64 and self._ySpeed > 0:
+			self._ySpeed = 0
+
 		if fire:
 			self._fire()
 
