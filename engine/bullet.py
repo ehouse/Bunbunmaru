@@ -1,21 +1,18 @@
 import sys
 import pygame
-import engine.entity
+from engine.entity import Entity
 
 class Bullet( Entity ):
 	def __init__ ( self, xpos, ypos, speed, damageValue, sprite, hitbox ):
-		self.xpos = xpos
-		self.ypos = ypos
+		Entity.__init__self( xpos, ypos, sprite, hitbox )
 		self._speed = _speed
 		self.damageValue = damageValue
-		self._sprite = sprite
-		self.hitbox = hitbox
 
-	def act():
+	def act( self ):
 		self.ypos -= _speed
 		self.hitbox = self.hitbox.move( 0 , __speed )
 
-	def collidesWith( entity ):
+	def collidesWith( slef, entity ):
 		if self.hitbox.colliderect( entity.hitbox ):
 			return True
 		return False

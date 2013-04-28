@@ -1,14 +1,16 @@
 import sys
-import pygame
-import engine.entity
+from pygame import Rect
+from engine.entity import Entity
 
 class Player( Entity ):
 	def __init__( self, lives, score, maxSpeed, sprite ):
 		# position vars
-		self.SPAWN_X = 400
-		self.SPAWN_Y = 300
+		self.SPAWN_X = 300
+		self.SPAWN_Y = 600
 		self.xpos = self.SPAWN_X
 		self.ypos = self.SPAWN_Y
+		Entity.__init__( self, 400 , 300, sprite, Rect( self.xpos - 10,
+							self.ypos - 10, self.xpos + 54, self.ypos + 54 ) )
 
 		# movement vars
 		self._maxSpeed = maxSpeed
@@ -23,13 +25,10 @@ class Player( Entity ):
 		self.invincibilityTime = 5000
 
 		# sprite vars
-		self._sprite = sprite
-		self.hitbox = rect( self.xpos - 10, self.ypos - 10, self.xpos + 54,
-								self.ypos + 54 )
-		self._itemBox = rect( self.xpos, self.ypos, self.xpos + 64,
+		self._itemBox = Rect( self.xpos, self.ypos, self.xpos + 64,
 									self.ypos + 64 )
 
-	def act():
+	def act( self ):
 		"""
 		Handles movement and other actions for the player
 		"""
@@ -73,11 +72,11 @@ class Player( Entity ):
 
 		#TODO invincibility timer
 
-	def draw():
+	def draw( self ):
 		#TODO Rendering code goes here
 		pass
 
-	def destroy():
+	def destroy( self ):
 		"""
 		Moves the player off screen temporally, then respawns them at the starting position
 		"""
@@ -88,15 +87,15 @@ class Player( Entity ):
 		self.hitbox = self.hitbox.move( self._xSpeed, self._ySpeed )
 		self._itemBox = self._itemBox.move( self._xSpeed, self._ySpeed )
 
-	def collidesWith():
+	def collidesWith( self ):
 		pass
 
-	def spawn():
+	def spawn( self ):
 		self.xpos = self.SPAWN_X
 		self.ypos = self.SPAWN_Y
 		self.invincible = True
 
-	def _move():
+	def _move( self ):
 		"""
 		Moves the player based off of the xSpeed and YSpeed
 		"""

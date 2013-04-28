@@ -1,13 +1,10 @@
 import sys
 import pygame
-import engine.entity
+from engine.entity import Entity
 
 class Enemy( Entity ):
 	def __init__( self, xpos, ypos, speed, hp, sprite, hitbox ):
-		# position vars
-		self.xpos = xpos
-		self.ypos = ypos
-
+		Entity.__init__( self, xpos, ypos, sprite, hitbox )
 		# movement vars
 		self._speed = speed
 
@@ -18,8 +15,6 @@ class Enemy( Entity ):
 		self.heat = 0
 
 		# sprite vars
-		self._sprite = sprite
-		self.hitbox = hitbox
 
 		def act():
 			#TODO add movement code here

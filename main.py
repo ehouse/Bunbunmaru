@@ -4,7 +4,9 @@ import os,sys
 import pygame
 from pygame.locals import *
 #local imports
-from engine import *
+from engine.level1 import Level1
+from engine.bulletmanager import BulletManager
+from engine.player import Player
 import resources
 
 class GameLoop:
@@ -27,30 +29,16 @@ class GameLoop:
 
         # entities
         self.enemies = self.level.getCurrentEnemies()
-        self.player = player( 3, 0, 5, None )
+        self.player = Player( 3, 0, 5, None )
 
-    def start(self):
-        """
-            Entry point of the game
-        """
-        while 1:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
-            # check if current wave is done, if it is, get new enemies
-            if level.isComplete():
-                enemies = level.getCurrentEnemies()
-            actall()
-            drawall()
-            #TODO add 'tick' stablizer
 
-    def actall():
-         player.act()
+    def _actall( self ):
+         self.player.act()
          self.bulletMan.update( self.enemies )
          for enemy in enemies:
              enemy.act()
 
-    def drawall():
+    def _drawall( self ):
         """
         Draws the player, bullets, and enemies (in that order) to the screen
         """
@@ -59,7 +47,7 @@ class GameLoop:
             enemy.draw()
         self.bulletMan.drawall()
 
-    def _load_png(name):
+    def _load_png( self, name):
         """
             Private Load_png method
             accept: name - file name
@@ -76,6 +64,20 @@ class GameLoop:
             print "Cannot load image: ",fullname
         return image
 
+    def start(self):
+        """
+            Entry point of the game
+        """
+        while 1:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
+            # check if current wave is done, if it is, get new enemies
+            if self.level.isComplete():
+                self.enemies = self.level.getCurrentEnemies()
+            self._actall()
+            self._drawall()
+            #TODO add 'tick' stablizer
 
 if __name__ == "__main__":
     bun = GameLoop()

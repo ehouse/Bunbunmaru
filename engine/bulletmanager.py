@@ -10,17 +10,17 @@ class BulletManager:
 		self._bulletList = []
 		self._playerBulletList = []
 
-	def addPlayerBullet( bullet ):
+	def addPlayerBullet( self, bullet ):
 		"""
 		Adds a bullet that will effect enemies to the bullet manager
 		"""
-		self._playerBulletList.append( bullet )
+		self._playerBulletList.append( self, bullet )
 
 	def addEnemyBullet( bullet ):
 		"""
 		Adds a bullet that will effect the player to the bullet manager
 		"""
-		self._bulletList.append( bullet )
+		self._bulletList.append( self, bullet )
 
 	def drawall():
 		for bullet in self._bulletList:
@@ -29,20 +29,20 @@ class BulletManager:
 		for bullet in self._playerBulletList:
 			bullet.draw()
 
-	def _testEnemyBulletCollision():
+	def _testEnemyBulletCollision( self ):
 		"""
 		Tests to see if any of the enemy bullets hit the player. This modifies
 		Player.hit to True if there is a hit detected
 		"""
 		for bullet in self._bulletList:
 			if bullet.destroyed:
-				self._bulletList.remove( bullet )
-			elif bullet.collidesWith( player ):
+				self._bulletList.remove( self, bullet )
+			elif bullet.collidesWith( self, player ):
 				player.hit = True
 				bullet.hit = True
 				break # if the player is hit once, no point in checking others
 
-	def _testPlayerBulletCollision( entity ):
+	def _testPlayerBulletCollision( self, entity ):
 		"""
 		Tests if the player's bullets have collided with any enemies. This also
 		applys the hits to enemies as needed.
@@ -60,14 +60,14 @@ class BulletManager:
 				if distance < 100:
 					enemy.heat += ( 100 - distance ) / 10
 
-	def update( enemies ):
+	def update( self, enemies ):
 		"""
 		Updates the posision of each bullet and checks for collisions
 		"""
 		for bullet in self._bulletList:
 			bullet.act()
 
-		for enemy in enemies:
+		for enemy in self.enemies:
 			_testPlayerBulletCollision( enemy )
 
 		for bullet in self.playerBullets:

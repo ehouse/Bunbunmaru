@@ -8,7 +8,7 @@ class Entity:
 		self._sprite = sprite
 		self._hitbox = hitbox
 
-	def act():
+	def act( self ):
 		"""
 		Handles movement for the entity
 
@@ -17,13 +17,13 @@ class Entity:
 		"""
 		pass
 
-	def draw():
+	def draw( self ):
 		"""
 		Handles drawing for the entity
 		"""
 		pass
 
-	def destroy():
+	def destroy( self ):
 		"""
 		Handles removal from the gameboard for the entity
 		"""
@@ -33,7 +33,7 @@ class Entity:
 		self._hitbox = self._hitbox.move( _xSpeed, _ySpeed )
 		self.destroyed = True
 
-	def collidesWith( other ):
+	def collidesWith( self, other ):
 		"""
 		Tests if the entity collides with another entity
 		"""
