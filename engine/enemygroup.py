@@ -3,7 +3,7 @@ import pygame
 import engine.Enemy
 
 class EnemyGroup:
-	def init__( self, enemylist )
+	def init__( self, enemylist ):
 		self.enemyList = enemylist
 
 	def act():
@@ -21,10 +21,10 @@ class EnemyGroup:
 			enemy.draw()
 
 	def isDone():
-	"""
-	Checks if all enemies in the group are destroyed or have finished their pattern
-	Returns: Boolean->True if the pattern is done otherwise False
-	"""
+		"""
+		Checks if all enemies in the group are destroyed or have finished their pattern
+		Returns: Boolean->True if the pattern is done otherwise False
+		"""
 		done = True
 
 		for enemy in enemyList:
