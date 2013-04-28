@@ -27,6 +27,8 @@ class Player( Entity ):
 		self.invincible = False
 		self._invincibilityTime = 5000
 		self._bulletMan = bulletMan
+		self._FIRE_COOL_MAX = 10
+		self._fireCoolDown = 0
 
 		# sprite vars
 		self._itemBox = Rect( self.xpos, self.ypos, self.xpos + 64,
@@ -99,8 +101,11 @@ class Player( Entity ):
 		elif self._viewBox.y >= 600 - 64 and self._ySpeed > 0:
 			self._ySpeed = 0
 
-		if fire:
+		if fire and self._fireCoolDown <= 0:
 			self._fire()
+			self._fireCoolDown = self._FIRE_COOL_MAX
+		elif self._fireCoolDown > 0:
+			self._fireCoolDown -= 1
 
 		self._move()
 
@@ -109,8 +114,8 @@ class Player( Entity ):
 	def _fire( self ):
 		bullet = Bullet( self.xpos, self.ypos, -5, 5, self._bulletSprite,
 						self._bulletSprite.get_rect())
-		xpos = self._viewBox.x
-		ypos = self._viewBox.y
+		xpos = self._viewBox.x + 30
+		ypos = self._viewBox.y + 22
 		bullet._hitbox.move_ip(xpos, ypos)
 		self._bulletMan.addPlayerBullet( bullet )
 	def draw( self, screen ):
