@@ -52,7 +52,7 @@ class GameLoop:
         self.player.draw(self.screen)
         for enemy in self.enemies.enemyList:
             enemy.draw()
-        self.bulletMan.drawall()
+        self.bulletMan.drawall( self.screen)
         pygame.display.flip()
 
     def _load_png( self, name):

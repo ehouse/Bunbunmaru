@@ -8,7 +8,7 @@ class Level1:
 	def __init__( self ):
 		self.enemyGroupList = [
 			EnemyGroup (
-				[ Enemy( 0, 0, 5, 10, None, None ) ]
+				[ Enemy( 0, 0, 5, 10, None, Rect(0, 0, 64, 64 )) ]
 			)
 		]
 		self.currentEnemyGroup = 0
