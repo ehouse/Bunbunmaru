@@ -7,7 +7,6 @@ from pygame.locals import *
 from engine.level1 import Level1
 from engine.bulletmanager import BulletManager
 from engine.player import Player
-import resources
 
 class GameLoop:
     def __init__(self,width=640,height=480):
@@ -21,7 +20,11 @@ class GameLoop:
         self.width = width
         self.height = height
         self.screen = self.game.display.set_mode((self.width,self.height))
-        self.game.display.set_caption('Bunbunmaru Gamejam 2013')
+        self.game.display.set_caption('Bunbunmaru Gamejam 2013 | TOPGUN')
+
+        self.f14 = self._load_png("f14.png")
+        self.f14rec = self.f14.get_rect()
+        self.screen.blit(self.f14,(self.f14rec))
 
         # level management
         self.level = Level1()
@@ -46,6 +49,7 @@ class GameLoop:
         for enemy in self.enemies.enemyList:
             enemy.draw()
         self.bulletMan.drawall()
+        pygame.display.flip()
 
     def _load_png( self, name):
         """
