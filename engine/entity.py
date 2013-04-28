@@ -2,7 +2,7 @@ import sys
 import pygame
 
 class Entity:
-	def __init__( self, xpos, ypos, sprite, hitbox )
+	def __init__( self, xpos, ypos, sprite, hitbox ):
 		self.xpos = xpos
 		self.ypos = ypos
 		self._sprite = sprite
