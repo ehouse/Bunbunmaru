@@ -23,9 +23,10 @@ class GameLoop:
         self.screen.fill((135,206,250))
         self.game.display.set_caption('Bunbunmaru Gamejam 2013 | TOPGUN')
 
+        # images
         self.f14 = self._load_png("f14.png")
-        self.f14rec = self.f14.get_rect()
-        self.screen.blit(self.f14,(self.f14rec))
+        #self.f14rec = self.f14.get_rect()
+        #self.screen.blit(self.f14,(self.f14rec))
 
         # level management
         self.level = Level1()
@@ -33,7 +34,7 @@ class GameLoop:
 
         # entities
         self.enemies = self.level.getCurrentEnemies()
-        self.player = Player( 3, 0, 5, None )
+        self.player = Player( 3, 0, 5, self.f14, self.f14.get_rect() )
 
 
     def _actall( self ):
@@ -46,7 +47,7 @@ class GameLoop:
         """
         Draws the player, bullets, and enemies (in that order) to the screen
         """
-        self.player.draw()
+        self.player.draw(self.screen)
         for enemy in self.enemies.enemyList:
             enemy.draw()
         self.bulletMan.drawall()

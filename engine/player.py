@@ -1,9 +1,11 @@
 import sys
+import pygame
 from pygame import Rect
+from pygame.locals import *
 from engine.entity import Entity
 
 class Player( Entity ):
-	def __init__( self, lives, score, maxSpeed, sprite ):
+	def __init__( self, lives, score, maxSpeed, sprite, viewBox ):
 		# position vars
 		self.SPAWN_X = 300
 		self.SPAWN_Y = 600
@@ -27,6 +29,7 @@ class Player( Entity ):
 		# sprite vars
 		self._itemBox = Rect( self.xpos, self.ypos, self.xpos + 64,
 									self.ypos + 64 )
+		self._viewBox = viewBox
 
 	def act( self ):
 		"""
@@ -39,7 +42,19 @@ class Player( Entity ):
 		down = False
 		left = False
 		right = False
+		focus = False
+		fire = False
+		bomb = False
 
+		if pygame.key.get_focused():
+			keys = pygame.key.get_pressed()
+			up = keys[K_UP]
+			down = keys[K_DOWN]
+			right = keys[K_RIGHT]
+			left = keys[K_LEFT]
+			focus = keys[K_LSHIFT]
+			fire = keys[K_z]
+			bomb = keys[K_x]
 		# Get if focused here
 		if focused == True:
 			if up == True:
@@ -72,9 +87,8 @@ class Player( Entity ):
 
 		#TODO invincibility timer
 
-	def draw( self ):
-		#TODO Rendering code goes here
-		pass
+	def draw( self, screen ):
+		screen.blit(self._sprite,(self._viewBox))
 
 	def destroy( self ):
 		"""
