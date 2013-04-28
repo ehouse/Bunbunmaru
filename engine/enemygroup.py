@@ -7,12 +7,12 @@ class EnemyGroup:
 		self.enemyList = enemyList
 		self.sprite = sprite
 
-	def act( self ):
+	def act( self, player ):
 		"""
 		Updates each enemy in the enemy list
 		"""
 		for enemy in enemyList:
-			enemy.act()
+			enemy.act( player )
 
 	def draw( self ):
 		"""

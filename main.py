@@ -51,7 +51,7 @@ class GameLoop:
             # game is done, do that shit here
             pass
          for enemy in self.enemies.enemyList:
-             enemy.act()
+             enemy.act( self.player )
 
     def _drawall( self ):
         """
