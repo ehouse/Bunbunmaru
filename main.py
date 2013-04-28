@@ -27,11 +27,8 @@ class GameLoop:
 
         # images
         self.f14 = self._load_png("f14.png")
-<<<<<<< HEAD
         self.cloud = self._load_png("alpha_cloud.png")
-=======
         self.bullet = self._load_png("bullet.png")
->>>>>>> d868cc96191fc3439e4ecd4f67f5f5a51fb3d41c
 
         # level management
         self.level = Level1()
