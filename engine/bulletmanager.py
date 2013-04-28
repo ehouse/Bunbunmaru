@@ -22,7 +22,7 @@ class BulletManager:
 		"""
 		self._bulletList.append( self, bullet )
 
-	def drawall():
+	def drawall( self ):
 		for bullet in self._bulletList:
 			bullet.draw()
 
@@ -67,10 +67,10 @@ class BulletManager:
 		for bullet in self._bulletList:
 			bullet.act()
 
-		for enemy in self.enemies:
-			_testPlayerBulletCollision( enemy )
+		for enemy in enemies.enemyList:
+			self._testPlayerBulletCollision( enemy )
 
-		for bullet in self.playerBullets:
+		for bullet in self._playerBulletList:
 			bullet.act()
 
-		_testEnemyBulletCollision()
+		self._testEnemyBulletCollision()

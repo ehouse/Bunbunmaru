@@ -35,7 +35,7 @@ class GameLoop:
     def _actall( self ):
          self.player.act()
          self.bulletMan.update( self.enemies )
-         for enemy in enemies:
+         for enemy in self.enemies.enemyList:
              enemy.act()
 
     def _drawall( self ):
@@ -43,7 +43,7 @@ class GameLoop:
         Draws the player, bullets, and enemies (in that order) to the screen
         """
         self.player.draw()
-        for enemy in self.enemies:
+        for enemy in self.enemies.enemyList:
             enemy.draw()
         self.bulletMan.drawall()
 
