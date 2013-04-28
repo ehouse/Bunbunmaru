@@ -27,7 +27,11 @@ class Entity:
 		"""
 		Handles removal from the gameboard for the entity
 		"""
-		pass
+		self.xpos = -99
+		self.ypos = -99
+
+		self._hitbox = self._hitbox.move( _xSpeed, _ySpeed )
+		self.destroyed = True
 
 	def collidesWith( other ):
 		"""

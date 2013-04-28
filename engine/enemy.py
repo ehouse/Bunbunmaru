@@ -3,7 +3,7 @@ import pygame
 import engine.Entity
 
 class Enemy( Entity ):
-	def __init__( self, xpos, ypos, speed, sprite, hitbox ):
+	def __init__( self, xpos, ypos, speed, hp, sprite, hitbox ):
 		# position vars
 		self.xpos = xpos
 		self.ypos = ypos
@@ -11,13 +11,23 @@ class Enemy( Entity ):
 		# movement vars
 		self._speed = speed
 
+		# game vars
+		self.destroyed = False
+		self.hit = False
+		self.hp = hp
+
 		# sprite vars
 		self._sprite = sprite
-		self._hitbox = hitbox
+		self.hitbox = hitbox
 
 		def act():
-			#TODO add movemebt code here
-			pass
+			#TODO add movement code here
+			if self.hp <= 0:
+				destroyed = True
+
+			if destroyed:
+				#TODO place death explosion here
+				destroy()
 
 		def draw():
 			pass
@@ -26,7 +36,8 @@ class Enemy( Entity ):
 			self.xpos = -99
 			self.ypos = -99
 
-			self._hitbox = self._hitbox.move( _xSpeed, _ySpeed )
+			self.hitbox = self.hitbox.move( _xSpeed, _ySpeed )
+			self.destroyed = True
 
-		def collidesWith():
-			pass
+		def applyHit( bullet ):
+			self.hp -= bullet.damageValue

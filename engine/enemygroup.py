@@ -3,7 +3,7 @@ import pygame
 import engine.Enemy
 
 class EnemyGroup:
-	def init__( self, enemylist ):
+	def __init__( self, enemylist ):
 		self.enemyList = enemylist
 
 	def act():

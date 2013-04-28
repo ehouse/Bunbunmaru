@@ -24,7 +24,7 @@ class Player( Entity ):
 
 		# sprite vars
 		self._sprite = sprite
-		self._hitbox = hitbox
+		self.hitbox = hitbox
 		self._itemBox = itemBox
 
 	def act():
@@ -83,7 +83,7 @@ class Player( Entity ):
 		self.xpos = -99
 		self.ypos = -99
 
-		self._hitbox = self._hitbox.move( self._xSpeed, self._ySpeed )
+		self.hitbox = self.hitbox.move( self._xSpeed, self._ySpeed )
 		self._itemBox = self._itemBox.move( self._xSpeed, self._ySpeed )
 
 	def collidesWith():
@@ -101,5 +101,5 @@ class Player( Entity ):
 		self.xpos = self.xpos + self._xSpeed
 		self.ypos = self.ypos + self._ySpeed
 
-		self._hitbox = self._hitbox.move( self._xSpeed, self._ySpeed )
+		self.hitbox = self.hitbox.move( self._xSpeed, self._ySpeed )
 		self._itemBox = self._itemBox.move( self._xSpeed, self._ySpeed )

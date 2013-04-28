@@ -8,8 +8,8 @@ class Level1:
 		# We'll create a bs enemy here
 		self.enemyGroupList = [
 			EnemyGroup [
-				Enemy( 0, 0, 5, None, rect( 0, 0, 64, 64 )),
-				Enemy( 100, 0, 5, None, rect( 100, 0, 64, 64 ))
+				Enemy( 0, 0, 5, 10, None, rect( 0, 0, 64, 64 )),
+				Enemy( 100, 0, 5, 100, None, rect( 100, 0, 64, 64 ))
 			]
 		]
 		self.currentEnemyGroup = 0
@@ -34,5 +34,6 @@ class Level1:
 		for e in enemyGroupList:
 			if not e.isDone():
 				return False
+		self.currentEnemyGroup+=1
 		return True
 
