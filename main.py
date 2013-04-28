@@ -37,7 +37,7 @@ class GameLoop:
 
         # entities
         self.enemies = self.level.getCurrentEnemies()
-        self.sky = clouds(self.cloud,self.cloud.get_rect())
+        self.sky = clouds(self.cloud)
         self.player = Player( 3, 0, self.bulletMan, 1, self.f14,
                               self.f14.get_rect(), self.bullet,
                               self.bullet.get_rect() )
