@@ -20,6 +20,7 @@ class GameLoop:
         self.width = width
         self.height = height
         self.screen = self.game.display.set_mode((self.width,self.height))
+        self.screen.fill((135,206,250))
         self.game.display.set_caption('Bunbunmaru Gamejam 2013 | TOPGUN')
 
         # images
