@@ -20,13 +20,12 @@ class GameLoop:
         self.width = width
         self.height = height
         self.screen = self.game.display.set_mode((self.width,self.height))
-        self.screen.fill((135,206,250))
+        self.clock = pygame.time.Clock()
         self.game.display.set_caption('Bunbunmaru Gamejam 2013 | TOPGUN')
+        self.clock.tick(60)
 
         # images
         self.f14 = self._load_png("f14.png")
-        #self.f14rec = self.f14.get_rect()
-        #self.screen.blit(self.f14,(self.f14rec))
 
         # level management
         self.level = Level1()
@@ -47,6 +46,7 @@ class GameLoop:
         """
         Draws the player, bullets, and enemies (in that order) to the screen
         """
+        self.screen.fill((135,206,250))
         self.player.draw(self.screen)
         for enemy in self.enemies.enemyList:
             enemy.draw()
