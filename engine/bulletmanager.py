@@ -14,7 +14,7 @@ class BulletManager:
 		"""
 		Adds a bullet that will effect enemies to the bullet manager
 		"""
-		self._playerBulletList.append( self, bullet )
+		self._playerBulletList.append( bullet )
 
 	def addEnemyBullet( bullet ):
 		"""
@@ -22,12 +22,12 @@ class BulletManager:
 		"""
 		self._bulletList.append( self, bullet )
 
-	def drawall( self ):
+	def drawall( self, screen):
 		for bullet in self._bulletList:
-			bullet.draw()
+			bullet.draw( screen )
 
 		for bullet in self._playerBulletList:
-			bullet.draw()
+			bullet.draw( screen )
 
 	def _testEnemyBulletCollision( self ):
 		"""
@@ -55,10 +55,10 @@ class BulletManager:
 				self._playerBulletList.remove( bullet )
 			elif bullet.collidesWith( entity ):
 				entity.applyHit( bullet )
-				distance = math.sqrt( entity.xpos, bullet.xpos,
-								entity.ypos, bullet.xpos )
+				distance = math.sqrt( math.pow( entity.xpos + bullet.xpos, 2) - \
+								math.pow( entity.ypos + bullet.xpos, 2 ))
 				if distance < 100:
-					enemy.heat += ( 100 - distance ) / 10
+					entity.heat += ( 100 - distance ) / 10
 
 	def update( self, enemies ):
 		"""

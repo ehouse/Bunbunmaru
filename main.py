@@ -27,7 +27,11 @@ class GameLoop:
 
         # images
         self.f14 = self._load_png("f14.png")
+<<<<<<< HEAD
         self.cloud = self._load_png("alpha_cloud.png")
+=======
+        self.bullet = self._load_png("bullet.png")
+>>>>>>> d868cc96191fc3439e4ecd4f67f5f5a51fb3d41c
 
         # level management
         self.level = Level1()
@@ -35,9 +39,10 @@ class GameLoop:
 
         # entities
         self.enemies = self.level.getCurrentEnemies()
-        self.player = Player( 3, 0, 5, self.f14, self.f14.get_rect() )
         self.sky = clouds(self.cloud,self.cloud.get_rect())
-
+        self.player = Player( 3, 0, self.bulletMan, 1, self.f14,
+                              self.f14.get_rect(), self.bullet,
+                              self.bullet.get_rect() )
 
     def _actall( self ):
         self.sky.act()
@@ -55,7 +60,7 @@ class GameLoop:
         self.player.draw(self.screen)
         for enemy in self.enemies.enemyList:
             enemy.draw()
-        self.bulletMan.drawall()
+        self.bulletMan.drawall( self.screen)
         pygame.display.flip()
 
     def _load_png( self, name):

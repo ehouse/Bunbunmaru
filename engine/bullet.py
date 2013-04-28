@@ -4,19 +4,21 @@ from engine.entity import Entity
 
 class Bullet( Entity ):
 	def __init__ ( self, xpos, ypos, speed, damageValue, sprite, hitbox ):
-		Entity.__init__self( xpos, ypos, sprite, hitbox )
-		self._speed = _speed
+		Entity.__init__( self, xpos, ypos, sprite, hitbox )
+		self._speed = speed
 		self.damageValue = damageValue
+		self.destroyed = False
 
 	def act( self ):
-		self.ypos -= _speed
-		self.hitbox = self.hitbox.move( 0 , __speed )
+		self.ypos -= self._speed
+		self._hitbox = self._hitbox.move( 0 , self._speed )
+		if self._hitbox.y <= -10:
+			self.destroyed = True
 
-	def collidesWith( slef, entity ):
-		if self.hitbox.colliderect( entity.hitbox ):
+	def collidesWith( self, entity ):
+		if self._hitbox.colliderect( entity._hitbox ):
 			return True
 		return False
 
-	def draw():
-		#TODO write draw
-		pass
+	def draw( self, screen ):
+		screen.blit( self._sprite, self._hitbox )
