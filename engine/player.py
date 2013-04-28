@@ -3,10 +3,10 @@ import pygame
 import engine.Entity
 
 class Player( Entity ):
-	def __init__( self, xpos, ypos, maxSpeed, sprite, hitbox, item_box ):
+	def __init__( self, xpos, ypos, lives, score, maxSpeed, sprite, hitbox, item_box ):
 		# position vars
 		self.xpos = xpos
-		self.ypos = ypos
+		self.ypos = self.ypos
 
 		# movement vars
 		self._maxSpeed = maxSpeed
@@ -14,10 +14,18 @@ class Player( Entity ):
 		self._xSpeed = 0
 		self._ySpeed = 0
 
+		# Game vars
+		self.lives = lives
+		self.score = score
+		self.SPAWN_X = 400
+		self.SPAWN_Y = 300
+		self.invincible = False
+		self.invincibilityTime = 5000
+
 		# sprite vars
 		self._sprite = sprite
 		self._hitbox = hitbox
-		self._item_box = item_box
+		self._itemBox = itemBox
 
 	def act():
 		"""
@@ -34,46 +42,64 @@ class Player( Entity ):
 		# Get if focused here
 		if focused == True:
 			if up == True:
-				_ySpeed = -1 * _focusedSpeed
+				self._ySpeed = -1 * self._focusedSpeed
 			elif down == True:
-				_ySpeed = _focusedSpeed
+				self._ySpeed = self._focusedSpeed
 			else:
-				_ySpeed = 0
+				self._ySpeed = 0
 
 			if left == True:
-				_xSpeed = -1 * _focusedSpeed
+				self._xSpeed = -1 * self._focusedSpeed
 			elif right == True:
-				_xSpeed = _focusedSpeed
+				self._xSpeed = self._focusedSpeed
 			else:
-				_xSpeed = 0
+				self._xSpeed = 0
 		else:
 			if up == True:
-				_ySpeed = -1 * _maxSpeed
+				self._ySpeed = -1 * self._maxSpeed
 			elif down == True:
-				_ySpeed = _maxSpeed
+				self._ySpeed = self._maxSpeed
 			else:
-				_ySpeed = 0
+				self._ySpeed = 0
 
 			if left == True:
-				_xSpeed = -1 * _maxSpeed
+				self._xSpeed = -1 * self._maxSpeed
 			elif right == True:
-				_xSpeed = _maxSpeed
+				self._xSpeed = self._maxSpeed
 			else:
-				_xSpeed = 0
-	pass
+				self._xSpeed = 0
+
+		#TODO invincibility timer
 
 	def draw():
-		# Rendering code goes here
+		#TODO Rendering code goes here
 		pass
 
 	def destroy():
-		# Draw explosion
+		"""
+		Moves the player off screen temporally, then respawns them at the starting position
+		"""
+		#TODO Draw explosion
 		self.xpos = -99
 		self.ypos = -99
+
+		self._hitbox = self._hitbox.move( self._xSpeed, self._ySpeed )
+		self._itemBox = self._itemBox.move( self._xSpeed, self._ySpeed )
 
 	def collidesWith():
 		pass
 
+	def spawn():
+		self.xpos = self.SPAWN_X
+		self.ypos = self.SPAWN_Y
+		self.invincible = True
+
 	def _move():
-		xpos = xpos + _xSpeed
-		ypos = ypos + _ySpeed
+		"""
+		Moves the player based off of the xSpeed and YSpeed
+		"""
+		self.xpos = self.xpos + self._xSpeed
+		self.ypos = self.ypos + self._ySpeed
+
+		self._hitbox = self._hitbox.move( self._xSpeed, self._ySpeed )
+		self._itemBox = self._itemBox.move( self._xSpeed, self._ySpeed )
