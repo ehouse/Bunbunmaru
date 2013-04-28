@@ -26,6 +26,7 @@ class GameLoop:
 
         # images
         self.f14 = self._load_png("f14.png")
+        self.bullet = self._load_png("bullet.png")
 
         # level management
         self.level = Level1()
@@ -33,8 +34,9 @@ class GameLoop:
 
         # entities
         self.enemies = self.level.getCurrentEnemies()
-        self.player = Player( 3, 0, 5, self.f14, self.f14.get_rect() )
-
+        self.player = Player( 3, 0, self.bulletMan, 1, self.f14,
+                              self.f14.get_rect(), self.bullet,
+                              self.bullet.get_rect() )
 
     def _actall( self ):
          self.player.act()

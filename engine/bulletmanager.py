@@ -14,7 +14,7 @@ class BulletManager:
 		"""
 		Adds a bullet that will effect enemies to the bullet manager
 		"""
-		self._playerBulletList.append( self, bullet )
+		self._playerBulletList.append( bullet )
 
 	def addEnemyBullet( bullet ):
 		"""

@@ -3,9 +3,10 @@ import pygame
 from pygame import Rect
 from pygame.locals import *
 from engine.entity import Entity
+from engine.bullet import Bullet
 
 class Player( Entity ):
-	def __init__( self, lives, score, maxSpeed, sprite, viewBox ):
+	def __init__( self, lives, score, bulletMan, maxSpeed, sprite, viewBox, bulletSprite, bulletBox ):
 		# position vars
 		self.SPAWN_X = 300
 		self.SPAWN_Y = 600
@@ -16,7 +17,7 @@ class Player( Entity ):
 
 		# movement vars
 		self._maxSpeed = maxSpeed
-		self._focusedSpeed = maxSpeed /  2
+		self._focusedSpeed = maxSpeed /  2.0
 		self._xSpeed = 0
 		self._ySpeed = 0
 
@@ -24,12 +25,15 @@ class Player( Entity ):
 		self.lives = lives
 		self.score = score
 		self.invincible = False
-		self.invincibilityTime = 5000
+		self._invincibilityTime = 5000
+		self._bulletMan = bulletMan
 
 		# sprite vars
 		self._itemBox = Rect( self.xpos, self.ypos, self.xpos + 64,
 									self.ypos + 64 )
 		self._viewBox = viewBox
+		self._bulletSprite = bulletSprite
+		self._bulletBox = bulletBox
 
 	def act( self ):
 		"""
@@ -85,10 +89,17 @@ class Player( Entity ):
 			else:
 				self._xSpeed = 0
 
+		if fire:
+			self._fire()
+
 		self._move()
 
 		#TODO invincibility timer
 
+	def _fire( self ):
+		self._bulletMan.addPlayerBullet( Bullet( self.xpos, self.ypos, 0,
+											10, self._bulletSprite,
+											self._bulletBox) )
 	def draw( self, screen ):
 		screen.blit(self._sprite,(self._viewBox))
 
