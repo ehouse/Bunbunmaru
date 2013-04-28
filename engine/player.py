@@ -112,17 +112,18 @@ class Player( Entity ):
 		#TODO invincibility timer
 
 	def _fire( self ):
-		bullet = Bullet( self.xpos, self.ypos, -5, 5, self._bulletSprite,
+		bullet = Bullet( self.xpos, self.ypos, -5, 1, self._bulletSprite,
 						self._bulletSprite.get_rect())
-		bullet2 = Bullet( self.xpos, self.ypos, -5, 5, self._bulletSprite,
+		bullet2 = Bullet( self.xpos, self.ypos, -5, 1, self._bulletSprite,
 						self._bulletSprite.get_rect())
-		xpos = self._viewBox.x + 18
+		xpos = self._viewBox.x + 16
 		ypos = self._viewBox.y + 22
 		bullet._hitbox.move_ip(xpos, ypos)
 		xpos = self._viewBox.x + 30
 		ypos = self._viewBox.y + 22
 		bullet2._hitbox.move_ip(xpos, ypos)
 		self._bulletMan.addPlayerBullet( bullet )
+		self._bulletMan.addPlayerBullet( bullet2 )
 	def draw( self, screen ):
 		screen.blit(self._sprite,(self._viewBox))
 

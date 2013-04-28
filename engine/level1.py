@@ -5,10 +5,10 @@ from engine.player import Player
 from engine.enemy import Enemy
 
 class Level1:
-	def __init__( self ):
+	def __init__( self, enemySprite ):
 		self.enemyGroupList = [
 			EnemyGroup (
-				[ Enemy( 0, 0, 5, 10, None, Rect(0, 0, 64, 64 )) ]
+				[ Enemy(100, 100, 1, 100, enemySprite, Rect(0, 0, 64, 64 )) ], enemySprite
 			)
 		]
 		self.currentEnemyGroup = 0
@@ -23,7 +23,11 @@ class Level1:
 		Gets the current group of enemies for the level
 		Returns: EnemyGroup->The current enemy group
 		"""
-		return self.enemyGroupList[self.currentEnemyGroup]
+		print self.currentEnemyGroup
+		if self.currentEnemyGroup > 0:
+			return None
+		else:
+			return self.enemyGroupList[self.currentEnemyGroup]
 
 	def isComplete( self ):
 		"""
