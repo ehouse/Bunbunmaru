@@ -3,8 +3,9 @@ import pygame
 from engine.enemy import Enemy
 
 class EnemyGroup:
-	def __init__( self, enemylist ):
-		self.enemyList = enemylist
+	def __init__( self , enemyList, sprite ):
+		self.enemyList = enemyList
+		self.sprite = sprite
 
 	def act( self ):
 		"""

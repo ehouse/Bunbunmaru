@@ -55,6 +55,7 @@ class BulletManager:
 				self._playerBulletList.remove( bullet )
 			elif bullet.collidesWith( entity ):
 				entity.applyHit( bullet )
+				self._playerBulletList.remove( bullet )
 				distance = math.sqrt( math.pow( entity.xpos + bullet.xpos, 2) - \
 								math.pow( entity.ypos + bullet.xpos, 2 ))
 				if distance < 100:
@@ -64,13 +65,14 @@ class BulletManager:
 		"""
 		Updates the posision of each bullet and checks for collisions
 		"""
-		for bullet in self._bulletList:
-			bullet.act()
+		if enemies != None:
+			for bullet in self._bulletList:
+				bullet.act()
 
-		for enemy in enemies.enemyList:
-			self._testPlayerBulletCollision( enemy )
+			for enemy in enemies.enemyList:
+				self._testPlayerBulletCollision( enemy )
 
-		for bullet in self._playerBulletList:
-			bullet.act()
+			for bullet in self._playerBulletList:
+				bullet.act()
 
-		self._testEnemyBulletCollision()
+			self._testEnemyBulletCollision()

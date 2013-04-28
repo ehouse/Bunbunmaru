@@ -14,27 +14,31 @@ class Enemy( Entity ):
 		self.hp = hp
 		self.heat = 0
 
+		self._hitbox.move_ip( xpos, ypos )
+
 		# sprite vars
 
 	def act( self ):
 		#TODO add movement code here
 		if self.hp <= 0:
-			destroyed = True
+			self.destroyed = True
 
 		if self.destroyed:
 			#TODO place death explosion here
-			destroy()
+			self.destroy()
 
-	def draw( self ):
-		pass
+	def draw( self, screen ):
+		screen.blit(self._sprite, self._hitbox)
 
-	def destroy():
+	def destroy( self ):
+		print "destroy"
 		self.xpos = -99
 		self.ypos = -99
 
-		self.hitbox = self.hitbox.move( _xSpeed, _ySpeed )
+		self.hitbox = self._hitbox.move_ip( -99, -99 )
 		self.destroyed = True
 
 	def applyHit( self, bullet ):
+		print self.hp
 		self.hp -= bullet.damageValue
 		self.heat += 20

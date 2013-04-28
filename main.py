@@ -29,9 +29,10 @@ class GameLoop:
         self.f14 = self._load_png("f14.png")
         self.cloud = self._load_png("alpha_cloud.png")
         self.bullet = self._load_png("bullet.png")
+        self.enemy = self._load_png("mig.png")
 
         # level management
-        self.level = Level1()
+        self.level = Level1( self.enemy )
         self.bulletMan = BulletManager()
 
         # entities
@@ -42,10 +43,14 @@ class GameLoop:
                               self.bullet.get_rect() )
 
     def _actall( self ):
-        self.sky.act()
-        self.player.act()
-        self.bulletMan.update( self.enemies )
-        for enemy in self.enemies.enemyList:
+         self.sky.act()
+         self.player.act()
+         if self.enemies != None:
+             self.bulletMan.update( self.enemies )
+         else:
+            # game is done, do that shit here
+            pass
+         for enemy in self.enemies.enemyList:
              enemy.act()
 
     def _drawall( self ):
@@ -56,7 +61,7 @@ class GameLoop:
         self.sky.draw(self.screen)
         self.player.draw(self.screen)
         for enemy in self.enemies.enemyList:
-            enemy.draw()
+            enemy.draw( self.screen)
         self.bulletMan.drawall( self.screen)
         pygame.display.flip()
 
@@ -88,6 +93,8 @@ class GameLoop:
             # check if current wave is done, if it is, get new enemies
             if self.level.isComplete():
                 self.enemies = self.level.getCurrentEnemies()
+                if self.enemies == None:
+                    break
             self._actall()
             self._drawall()
             #TODO add 'tick' stablizer
