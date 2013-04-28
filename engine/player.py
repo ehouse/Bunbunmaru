@@ -85,6 +85,8 @@ class Player( Entity ):
 			else:
 				self._xSpeed = 0
 
+		self._move()
+
 		#TODO invincibility timer
 
 	def draw( self, screen ):
@@ -116,5 +118,7 @@ class Player( Entity ):
 		self.xpos = self.xpos + self._xSpeed
 		self.ypos = self.ypos + self._ySpeed
 
-		self.hitbox = self.hitbox.move( self._xSpeed, self._ySpeed )
+		self._viewBox = self._viewBox.move( self._xSpeed, self._ySpeed)
+
+		self._hitbox = self._hitbox.move( self._xSpeed, self._ySpeed )
 		self._itemBox = self._itemBox.move( self._xSpeed, self._ySpeed )
